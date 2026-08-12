@@ -19,6 +19,19 @@ Registry-level nameserver checks give the more accurate live-cutover status:
 
 This means moving Danika's two sites is not yet enough to safely cancel the shared hosting plan. Garrett's cutover must finish propagating, and Economics Detective must be cut over or intentionally retired.
 
+## Cloudflare staging status
+
+The `danikalaw.com` zone is staged on Cloudflare's Free plan but is not authoritative yet. Cloudflare assigned these nameservers:
+
+```text
+owen.ns.cloudflare.com
+sonia.ns.cloudflare.com
+```
+
+Cloudflare imported 29 Bluehost records, and the two wedding hosts that the automatic scan missed were added manually, for 31 staged records total. The Bluehost mail, FTP, calendar, contact, and control-panel hosts are set to **DNS only** so Cloudflare does not intercept unsupported protocols. Only the current web apex and `www` record remain proxied; the wedding hosts remain DNS-only until their Pages custom domains are ready.
+
+Do not replace the Bluehost nameservers until both Pages deployments and custom domains are working and the `@danikalaw.com` mail decision has been confirmed.
+
 ## Mail warning
 
 `danikalaw.com` currently publishes this mail route:
@@ -33,7 +46,7 @@ That destination is on the Bluehost server. Cancelling hosting or replacing DNS 
 
 1. Push and validate the repository's `main` branch.
 2. Create both Cloudflare Pages projects with Git integration and test their `pages.dev` URLs.
-3. Add `danikalaw.com` to Cloudflare DNS and carefully review every imported record, especially MX, SPF, DKIM, and DMARC records.
+3. Add `danikalaw.com` to Cloudflare DNS and carefully review every imported record, especially MX, SPF, DKIM, and DMARC records. *(Staged and reviewed; nameservers are unchanged.)*
 4. Add both the canonical and alias hostnames to their respective Pages projects: `danikalaw.com` plus `www.danikalaw.com`, and `www.wedding.danikalaw.com` plus `wedding.danikalaw.com`.
 5. Create Cloudflare Single Redirect rules that preserve the existing hostname behavior: `www.danikalaw.com` to the apex, and `wedding.danikalaw.com` to `www.wedding.danikalaw.com`, retaining the request path.
 6. At the Bluehost registrar, replace only the `danikalaw.com` authoritative nameservers with the pair assigned by Cloudflare.
