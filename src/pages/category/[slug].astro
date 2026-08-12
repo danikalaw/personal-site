@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { allCategories, posts, type Term } from "../../data/site";
+
+export function getStaticPaths() {
+  return allCategories.map((term) => ({ params: { slug: term.slug }, props: { term } }));
+}
+
+interface Props { term: Term }
+const { term } = Astro.props;
+const matches = posts.filter((post) => post.categories.some((category) => category.slug === term.slug));
+---
+
+<BaseLayout title={`${term.name} — Danika Law`} description={`Writing filed under ${term.name}.`} canonicalPath={`/category/${term.slug}/`}>
+  <header class="taxonomy-hero" id="top"><p class="eyebrow">Category</p><h1>{term.name}</h1><p>{matches.length} {matches.length === 1 ? "post" : "posts"}</p></header>
+  <div class="taxonomy-list">{matches.map((post) => <PostCard post={post} />)}</div>
+</BaseLayout>

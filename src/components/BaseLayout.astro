@@ -1,0 +1,78 @@
+---
+import "@fontsource-variable/geologica";
+import "@fontsource-variable/newsreader";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string | null;
+  canonicalPath?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "Danika Law — Data Scientist & Writer",
+  description = "Data science, thoughtful measurement, and notes from a life spent reading widely.",
+  image,
+  canonicalPath = Astro.url.pathname,
+  type = "website",
+  publishedTime,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, Astro.site);
+const socialImage = image ? new URL(image, Astro.site) : null;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f3ff" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="Danika Law" href="/rss.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="identity" href="/" aria-label="Danika Law, home">
+        <span class="identity__mark" aria-hidden="true"><span>D</span><span>L</span></span>
+        <span class="identity__name">Danika Law</span>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <a href="/writing/">Writing</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+
+      <a class="header-link" href="/rss.xml">RSS <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>© {new Date().getFullYear()} Danika Law</p>
+      <p>Questions · evidence · useful decisions</p>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>

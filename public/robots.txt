@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://danikalaw.com/sitemap-index.xml

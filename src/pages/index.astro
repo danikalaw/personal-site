@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import SignalField from "../components/SignalField.astro";
+import { posts } from "../data/site";
+
+const latest = posts.slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero__copy">
+      <p class="eyebrow">Data scientist · curious generalist · reader</p>
+      <h1 id="hero-title">I turn messy questions into <em>useful evidence.</em></h1>
+      <p class="hero__intro">
+        I’m Danika Law, a data scientist in British Columbia. I use statistics, machine learning, and visualization to find the story in complicated systems—and I write about what I learn along the way.
+      </p>
+      <a class="hero__jump" href="#writing">
+        Read the notes <span class="hero__jump-line" aria-hidden="true"></span><span aria-hidden="true">↓</span>
+      </a>
+    </div>
+
+    <SignalField />
+  </section>
+
+  <section class="latest" id="writing" aria-labelledby="writing-title">
+    <div class="section-heading">
+      <p class="eyebrow">Latest writing</p>
+      <h2 id="writing-title">Work, books, and the systems around us.</h2>
+      <p>Notes on data science and measurement sit beside annual reading lists, parenting reflections, and whatever else proved worth thinking through.</p>
+    </div>
+
+    <div class="latest__grid">
+      <PostCard post={latest[0]} featured />
+      <div class="latest__list">
+        {latest.slice(1).map((post) => <PostCard post={post} />)}
+      </div>
+    </div>
+
+    <a class="section-link" href="/writing/">Browse all 33 posts <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="about__portrait">
+      <img
+        src="/media/2021/07/familyphotos-teasers-27-2-scaled.jpg"
+        alt="Danika outdoors with her family"
+        width="2560"
+        height="1707"
+        loading="lazy"
+        decoding="async"
+      />
+      <p><span>Based in</span> British Columbia</p>
+    </div>
+
+    <div class="about__copy">
+      <p class="eyebrow">About</p>
+      <h2 id="about-title">The question comes before the method.</h2>
+      <div class="about__columns">
+        <p>
+          I’m a data scientist who enjoys discovering stories and insights in data. I like projects that push the limits of my expertise and ask me to expand the depth and breadth of what I know.
+        </p>
+        <p>
+          Away from the models: family and friends, board games, sci-fi, Taiwanese oolong, light hikes, music, knitting, crocheting, and exploring new food both at restaurants and in the kitchen.
+        </p>
+      </div>
+      <ul class="about__tools" aria-label="Technical tools">
+        <li>Statistics</li><li>Machine learning</li><li>Data visualization</li><li>R</li><li>Python</li><li>SQL</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-title">Have a question worth making legible?</h2>
+    <a href="mailto:danikalaw@gmail.com">Write to Danika <span aria-hidden="true">↗</span></a>
+  </section>
+</BaseLayout>

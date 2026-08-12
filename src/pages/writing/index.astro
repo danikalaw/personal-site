@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import { posts, shortDate, summary, topic } from "../../data/site";
+
+const years = Array.from(new Set(posts.map((post) => new Date(post.date).getFullYear())));
+---
+
+<BaseLayout
+  title="Writing — Danika Law"
+  description="Danika Law’s archive of writing on data science, measurement, books, parenting, and life."
+  canonicalPath="/writing/"
+>
+  <header class="archive-hero" id="top">
+    <p class="eyebrow">Writing archive · 2017–2024</p>
+    <h1>Notes from the workbench and the reading chair.</h1>
+    <p>Thirty-three essays and reading journals, migrated intact from the original WordPress site.</p>
+  </header>
+
+  <div class="archive">
+    {years.map((year) => (
+      <section class="year-group" aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`}>{year}</h2>
+        <div class="archive-list">
+          {posts.filter((post) => new Date(post.date).getFullYear() === year).map((post) => (
+            <article class="archive-row">
+              <div class="archive-row__meta"><span>{topic(post)}</span><time datetime={post.date}>{shortDate(post.date)}</time></div>
+              <div>
+                <h3><a href={`/${post.slug}/`}>{post.title}</a></h3>
+                <p>{summary(post, 210)}</p>
+              </div>
+              <a class="archive-row__arrow" href={`/${post.slug}/`} aria-label={`Read ${post.title}`}>↗</a>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

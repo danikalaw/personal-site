@@ -1,0 +1,23 @@
+---
+import type { Entry } from "../data/site";
+import { shortDate, summary, topic } from "../data/site";
+
+interface Props {
+  post: Entry;
+  featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+---
+
+<article class:list={["post-card", { "post-card--featured": featured }]}>
+  <div class="post-card__meta">
+    <span>{topic(post)}</span>
+    <time datetime={post.date}>{shortDate(post.date)}</time>
+  </div>
+  <h3><a href={`/${post.slug}/`}>{post.title}</a></h3>
+  <p>{summary(post, featured ? 260 : 170)}</p>
+  <a class="arrow-link" href={`/${post.slug}/`} aria-label={`Read ${post.title}`}>
+    Read <span aria-hidden="true">→</span>
+  </a>
+</article>

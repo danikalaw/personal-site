@@ -1,0 +1,4 @@
+/about-me/ /#about 301
+/feed/ /rss.xml 301
+/author/danika-law/ /writing/ 301
+/page/* /writing/ 301

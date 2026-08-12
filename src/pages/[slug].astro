@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import { formatDate, pages, posts, summary, topic, type Entry } from "../data/site";
+
+export function getStaticPaths() {
+  const entries = [...posts, ...pages.filter((page) => page.slug !== "about-me")];
+  return entries.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+interface Props { entry: Entry }
+const { entry } = Astro.props;
+const postIndex = entry.type === "post" ? posts.findIndex((post) => post.slug === entry.slug) : -1;
+const newer = postIndex > 0 ? posts[postIndex - 1] : null;
+const older = postIndex >= 0 && postIndex < posts.length - 1 ? posts[postIndex + 1] : null;
+const description = summary(entry, 220) || `${entry.title} by Danika Law.`;
+---
+
+<BaseLayout
+  title={`${entry.title} — Danika Law`}
+  description={description}
+  image={entry.featuredMedia?.path}
+  canonicalPath={`/${entry.slug}/`}
+  type={entry.type === "post" ? "article" : "website"}
+  publishedTime={entry.type === "post" ? entry.date : undefined}
+  noindex={entry.slug === "baby-february-2021"}
+>
+  <article class="article" id="top">
+    <header class="article__header">
+      <a class="article__back" href="/writing/">← All writing</a>
+      <p class="eyebrow">{entry.type === "post" ? topic(entry) : "From the archive"}</p>
+      <h1>{entry.title}</h1>
+      {entry.type === "post" && <time datetime={entry.date}>Published {formatDate(entry.date)}</time>}
+    </header>
+
+    {entry.featuredMedia && (
+      <figure class="article__featured">
+        <img
+          src={entry.featuredMedia.path}
+          alt={entry.featuredMedia.alt}
+          width={entry.featuredMedia.width ?? undefined}
+          height={entry.featuredMedia.height ?? undefined}
+          decoding="async"
+        />
+      </figure>
+    )}
+
+    <div class="article__body" set:html={entry.content} />
+
+    {entry.type === "post" && entry.tags.length > 0 && (
+      <footer class="article__topics">
+        <span>Filed under</span>
+        <ul>{entry.tags.map((tag) => <li><a href={`/tag/${tag.slug}/`}>{tag.name}</a></li>)}</ul>
+      </footer>
+    )}
+  </article>
+
+  {entry.type === "post" && (
+    <nav class="post-nav" aria-label="Adjacent posts">
+      <div>{older && <><span>Older</span><a href={`/${older.slug}/`}>{older.title}</a></>}</div>
+      <div>{newer && <><span>Newer</span><a href={`/${newer.slug}/`}>{newer.title}</a></>}</div>
+    </nav>
+  )}
+</BaseLayout>
