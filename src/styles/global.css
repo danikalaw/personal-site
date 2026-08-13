@@ -189,12 +189,12 @@ iframe {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(28rem, 0.95fr);
-  gap: clamp(3rem, 7vw, 8rem);
-  align-items: center;
   min-height: calc(100svh - 7rem);
   padding-block: clamp(5rem, 9vw, 9rem);
+}
+
+.hero__copy {
+  max-width: 76rem;
 }
 
 .eyebrow {
@@ -217,19 +217,19 @@ iframe {
 }
 
 .hero h1 {
-  max-width: 11ch;
+  max-width: 12ch;
   margin-bottom: 2.25rem;
-  font-size: clamp(3.6rem, 7.25vw, 7.7rem);
+  font-size: clamp(3.6rem, 7.6vw, 8.2rem);
   font-variation-settings: "CRSV" 0, "SHRP" 40, "slnt" 0, "wght" 720;
-  letter-spacing: -0.068em;
-  line-height: 0.91;
+  letter-spacing: -0.062em;
+  line-height: 0.98;
 }
 
 .hero h1 em {
   display: inline;
-  padding: 0.01em 0.1em 0.06em;
-  color: var(--white);
-  background: var(--violet);
+  padding-inline: 0.025em;
+  color: inherit;
+  background: linear-gradient(transparent 72%, var(--aqua) 72%);
   box-decoration-break: clone;
   font-family: var(--display);
   font-style: normal;
@@ -238,7 +238,7 @@ iframe {
 }
 
 .hero__intro {
-  max-width: 38rem;
+  max-width: 50rem;
   margin-bottom: 3rem;
   color: var(--ink-soft);
   font-family: var(--body);
@@ -272,102 +272,6 @@ iframe {
   transform: scaleX(1.3);
 }
 
-.signal-field {
-  position: relative;
-  min-width: 0;
-  padding: clamp(1.5rem, 3vw, 2.75rem);
-  color: var(--white);
-  border: 1px solid var(--ink);
-  background: var(--ink);
-}
-
-.signal-field::before {
-  position: absolute;
-  top: -0.55rem;
-  right: 4rem;
-  width: 0.72rem;
-  height: 0.72rem;
-  background: var(--coral);
-  box-shadow: 0 0 0 0.45rem var(--paper);
-  content: "";
-}
-
-.signal-field__plot {
-  width: 100%;
-  height: auto;
-  border: 1px solid #403d49;
-}
-
-.signal-field__grid path {
-  fill: none;
-  stroke: #34313b;
-  stroke-width: 1;
-}
-
-.signal-field__uncertainty,
-.signal-field__signal {
-  fill: none;
-  stroke-linecap: square;
-  stroke-linejoin: bevel;
-}
-
-.signal-field__uncertainty {
-  stroke: #585361;
-  stroke-dasharray: 6 8;
-  stroke-width: 2;
-}
-
-.signal-field__signal {
-  stroke: var(--aqua);
-  stroke-width: 5;
-}
-
-.signal-field__points rect {
-  fill: var(--violet);
-  stroke: var(--white);
-  stroke-width: 3;
-}
-
-.signal-field__notes {
-  fill: #d2ced9;
-  font-family: var(--display);
-  font-size: 12px;
-  font-variation-settings: "wght" 520;
-  letter-spacing: 0.02em;
-}
-
-.signal-field__label {
-  position: absolute;
-  z-index: 2;
-  padding: 0.2rem 0.45rem;
-  color: #aaa5b1;
-  background: var(--ink);
-  font-size: 0.55rem;
-  font-variation-settings: "wght" 680;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.signal-field__label--question { bottom: 4.25rem; left: 1rem; transform: rotate(-90deg); }
-.signal-field__label--evidence { top: 1.2rem; left: 50%; transform: translateX(-50%); }
-.signal-field__label--decision { top: 4rem; right: 0.8rem; transform: rotate(90deg); }
-
-.signal-field__caption {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  margin: 1.25rem 0 0;
-  color: #bbb6c4;
-  font-size: 0.66rem;
-  font-variation-settings: "wght" 530;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.signal-field__caption span {
-  color: var(--aqua);
-}
-
 .latest {
   padding-block: clamp(5rem, 9vw, 9rem);
   border-top: 1px solid var(--rule);
@@ -379,6 +283,10 @@ iframe {
   gap: clamp(2rem, 6vw, 7rem);
   align-items: start;
   margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.section-heading--short {
+  grid-template-columns: 0.55fr 1.9fr;
 }
 
 .section-heading h2,
@@ -1007,14 +915,7 @@ iframe {
 }
 
 @media (max-width: 1000px) {
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .signal-field {
-    width: min(100%, 42rem);
-  }
+  .hero { min-height: auto; }
 
   .section-heading {
     grid-template-columns: 0.4fr 1fr;
@@ -1075,20 +976,11 @@ iframe {
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 14vw, 5rem);
+    max-width: 100%;
+    font-size: clamp(2.75rem, 12.75vw, 4.5rem);
+    letter-spacing: -0.052em;
+    line-height: 1.04;
   }
-
-  .signal-field {
-    padding: 1.1rem;
-  }
-
-  .signal-field__notes {
-    display: none;
-  }
-
-  .signal-field__label--question { bottom: 3.2rem; left: -0.5rem; }
-  .signal-field__label--evidence { top: 0.2rem; }
-  .signal-field__label--decision { top: 3rem; right: -0.8rem; }
 
   .section-heading,
   .about,

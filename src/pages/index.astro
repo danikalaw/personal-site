@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
 import PostCard from "../components/PostCard.astro";
-import SignalField from "../components/SignalField.astro";
 import { posts } from "../data/site";
 
 const latest = posts.slice(0, 5);
@@ -10,24 +9,21 @@ const latest = posts.slice(0, 5);
 <BaseLayout>
   <section class="hero" id="top" aria-labelledby="hero-title">
     <div class="hero__copy">
-      <p class="eyebrow">Data scientist · curious generalist · reader</p>
-      <h1 id="hero-title">I turn messy questions into <em>useful evidence.</em></h1>
+      <p class="eyebrow">Data scientist · Microsoft · British Columbia</p>
+      <h1 id="hero-title">Discovering <em>stories and insights</em> in data.</h1>
       <p class="hero__intro">
-        I’m Danika Law, a data scientist in British Columbia. I use statistics, machine learning, and visualization to find the story in complicated systems—and I write about what I learn along the way.
+        I enjoy using statistics, machine learning, and data visualization to uncover actionable insights regardless of industry. I especially enjoy projects which push the limits of my expertise, challenging me to expand my depth and breadth of knowledge.
       </p>
       <a class="hero__jump" href="#writing">
-        Read the notes <span class="hero__jump-line" aria-hidden="true"></span><span aria-hidden="true">↓</span>
+        Read my writing <span class="hero__jump-line" aria-hidden="true"></span><span aria-hidden="true">↓</span>
       </a>
     </div>
-
-    <SignalField />
   </section>
 
   <section class="latest" id="writing" aria-labelledby="writing-title">
-    <div class="section-heading">
+    <div class="section-heading section-heading--short">
       <p class="eyebrow">Latest writing</p>
-      <h2 id="writing-title">Work, books, and the systems around us.</h2>
-      <p>Notes on data science and measurement sit beside annual reading lists, parenting reflections, and whatever else proved worth thinking through.</p>
+      <h2 id="writing-title">Recent posts.</h2>
     </div>
 
     <div class="latest__grid">
@@ -55,13 +51,13 @@ const latest = posts.slice(0, 5);
 
     <div class="about__copy">
       <p class="eyebrow">About</p>
-      <h2 id="about-title">The question comes before the method.</h2>
+      <h2 id="about-title">What do you want to learn?</h2>
       <div class="about__columns">
         <p>
-          I’m a data scientist who enjoys discovering stories and insights in data. I like projects that push the limits of my expertise and ask me to expand the depth and breadth of what I know.
+          I am a data scientist who loves discovering stories and insights in data. I currently work as a Senior Data &amp; Applied Scientist at Microsoft.
         </p>
         <p>
-          Away from the models: family and friends, board games, sci-fi, Taiwanese oolong, light hikes, music, knitting, crocheting, and exploring new food both at restaurants and in the kitchen.
+          Rather than focus on the approach, I like to focus on the question: What do you want to learn, and what questions are you seeking answers for that will drive your business to success?
         </p>
       </div>
       <ul class="about__tools" aria-label="Technical tools">
@@ -72,7 +68,7 @@ const latest = posts.slice(0, 5);
 
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <p class="eyebrow">Contact</p>
-    <h2 id="contact-title">Have a question worth making legible?</h2>
+    <h2 id="contact-title">Get in touch.</h2>
     <a href="mailto:danikalaw@gmail.com">Write to Danika <span aria-hidden="true">↗</span></a>
   </section>
 </BaseLayout>
