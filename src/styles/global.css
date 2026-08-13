@@ -428,6 +428,7 @@ iframe {
 
 .about__portrait img {
   width: 100%;
+  height: auto;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 48% center;
@@ -997,6 +998,16 @@ iframe {
 
   .about__portrait {
     width: min(100%, 28rem);
+    padding-bottom: 2.4rem;
+  }
+
+  .about__portrait img {
+    aspect-ratio: 3 / 2;
+    object-position: center;
+  }
+
+  .about__portrait p {
+    bottom: 0;
   }
 
   .site-footer {
